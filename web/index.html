@@ -8,11 +8,12 @@
     <title>Toxic Multilabel Comment App</title>
 </head>
 
-<body onload="myFunction()">
-    <div class="login">
+<body>
+    <div>
         <h1>Toxicity of your words</h1>
         <form action="{{ url_for('predict')}}" method='post'>
-            <input id='text' type="text" name='text' placeholder="Enter your text" required='required' size="23" style="font-size:23px">
+            <input id='text' type="text" name='text' placeholder="Enter your text" required='required' size="50" style="height:200px;font-size:23pt;">
+            <br>
             <button id="button" type="submit" class="btn btn-primary btn-block btn-large" style="font-size:23px">Predict</button>
         </form>
         <h3>

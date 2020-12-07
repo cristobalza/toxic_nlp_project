@@ -5,7 +5,9 @@ import numpy as np
 
 app = Flask(__name__, template_folder='web')
 
-# Load the TF-IDF vocabulary specific to the category
+# Load the vecotrize vocabulary specific to the category
+# rb: read bytes
+# wb: write bytes
 with open(r"./models/toxic_vect.pkl", "rb") as f:
     tox = pickle.load(f)
 
@@ -24,7 +26,7 @@ with open(r"./models/threat_vect.pkl", "rb") as f:
 with open(r"./models/identity_hate_vect.pkl", "rb") as f:
     ide = pickle.load(f)
 
-# Load the pickled RDF models
+# Load the pickled models
 with open(r"./models/toxic_model.pkl", "rb") as f:
     tox_model = pickle.load(f)
 
@@ -48,13 +50,20 @@ with open(r"./models/identity_hate_model.pkl", "rb") as f:
 def home():
     return render_template('index.html')
 
+# Predicting function
 @app.route("/predict", methods=['POST'])
 def predict():
+    """
+    Function that inputs the written text and then is predicted by each of the trained moodel's toxic feature.
+
+    Returns: the rendered object from Flask API that takes in the differente prediction to the html file.
+    """
     
     # Take a string input from user
     user_input = request.form['text']
     data = [user_input]
 
+    # In hundreds
     vect = tox.transform(data)
     pred_tox = tox_model.predict_proba(vect)[:,1] * 100
 
@@ -73,6 +82,7 @@ def predict():
     vect = ide.transform(data)
     pred_ide = ide_model.predict_proba(vect)[:,1] * 100
 
+    # Round it
     out_tox = round(pred_tox[0], 2) 
     out_sev = round(pred_sev[0], 2) 
     out_obs = round(pred_obs[0], 2) 
@@ -80,7 +90,7 @@ def predict():
     out_thr = round(pred_thr[0], 2) 
     out_ide = round(pred_ide[0], 2) 
 
-    print(out_tox)
+    print('Done') # Helper message
 
     return render_template('index.html', 
                             pred_tox = 'Toxic Level Detected: {} %'.format(out_tox),
