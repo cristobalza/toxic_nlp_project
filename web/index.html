@@ -5,23 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Boot Strap css Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Bootstraps Java Scipts Links -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- JQuery links  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!--Added -->
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/stocktools/gui.css">
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/annotations/popup.css">
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+
+    <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/annotations-advanced.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/price-indicator.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/full-screen.js"></script>
+
+    <script src="https://code.highcharts.com/stock/modules/stock-tools.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <title>Toxic Multilabel Comment App</title>
 </head>
 
 <body>
-    <div>
-        <h1>Toxicity of your words</h1>
-        <form action="{{ url_for('predict')}}" method='post'>
-            <input id='text' type="text" name='text' placeholder="Enter your text" required='required' size="50" style="height:200px;font-size:23pt;">
-            <br>
-            <button id="button" type="submit" class="btn btn-primary btn-block btn-large" style="font-size:23px">Predict</button>
-        </form>
-        <h3>
-            {{ pred_tox }} <br><br> {{ pred_sev }} <br><br> {{ pred_obs }} <br><br> {{ pred_ins }} <br><br> {{ pred_thr }} <br><br> {{ pred_ide }} <br><br>
-        </h3>
+    <center>
+        <div>
+            <h1>Toxicity of your words</h1>
+            <form action="{{ url_for('predict')}}" method='post'>
+                <input id='text' type="text" name='text' placeholder="Enter your text" required='required' size="50" style="height:200px;font-size:23pt;">
+                <br>
+                <button id="button" type="submit" class="btn btn-primary btn-block btn-large" style="font-size:23px">Predict</button>
+            </form>
+            <h3>
+                {{ pred_tox }} <br><br> {{ pred_sev }} <br><br> {{ pred_obs }} <br><br> {{ pred_ins }} <br><br> {{ pred_thr }} <br><br> {{ pred_ide }} <br><br>
+            </h3>
 
-    </div>
+        </div>
+    </center>
 
-</body>
+
 
 </html>

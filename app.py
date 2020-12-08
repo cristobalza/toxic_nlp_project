@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, jsonify      
+from flask import Flask, render_template, url_for, request, jsonify, Markup           
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer 
 import pickle
 import numpy as np
@@ -92,6 +92,19 @@ def predict():
 
     print('Done') # Helper message
 
+    def bar_chart_plot():
+        df = pd.read_csv("countries.csv")
+        trace1 = go.Bar(x=df["Country"][0:20], y=df["GDP ($ per capita)"])
+        layout = go.Layout(title="GDP of the Country", xaxis=dict(title="Country"),
+                        yaxis=dict(title="GDP Per Capita"), )
+        data = [trace1]
+        fig = go.Figure(data=data, layout=layout)
+        fig_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+        return render_template('charts.html', plot=fig_json)
+
+    # bar_labels=['toxic', 'severe_toxic', 'obscene', 'insult', 'threat', 'identity_hate']
+    # bar_values=[20,40,60,80,100]
+
     return render_template('index.html', 
                             pred_tox = 'Toxic Level Detected: {} %'.format(out_tox),
                             pred_sev = 'Severe Toxic Level Detected: {} %'.format(out_sev), 
@@ -100,6 +113,22 @@ def predict():
                             pred_thr = 'Threat Level Detected: {} %'.format(out_thr),
                             pred_ide = 'Identity Hate Level Detected: {} %'.format(out_ide)                        
                             )
-     
+    # data = [out_tox, out_sev, out_obs, out_ins, out_thr, out_ide]
+    # return render_template('index.html',
+    #                         #  max =100, 
+    #                         #  labels = bar_labels,
+    #                         #   values =bar_values,
+    #                           pred_tox = out_tox,
+    #                           pred_sev = out_sev,
+    #                           pred_obs = out_obs,
+    #                           pred_ins = out_ins,
+    #                           pred_thr = out_thr,
+    #                           pred_ide = out_ide)
+    # return render_template('index.html', data_predict = data)
+    # bar_labels=['toxic', 'severe_toxic', 'obscene', 'insult', 'threat', 'identity_hate']
+    # data = [out_tox, out_sev, out_obs, out_ins, out_thr, out_ide]
+    # bar_values=data
+    # return render_template('index.html', title='Bitcoin Monthly Price in USD', max=17000, labels=bar_labels, values=bar_values)
+    
 # Server reloads itself if code changes so no need to keep restarting:
 app.run(debug=True)
