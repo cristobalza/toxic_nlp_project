@@ -125,5 +125,5 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
         st.balloons()
 # else :
 #     st.error(":(")
-link = '[cristobalza.comr](http://cristobalza.com)'
+link = '[cristobalza.com](http://cristobalza.com)'
 st.markdown(link, unsafe_allow_html=True)
