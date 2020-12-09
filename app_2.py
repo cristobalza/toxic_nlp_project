@@ -53,11 +53,12 @@ st.title('Toxicity of your words')
 
 st.warning("This app may show innacurate results, so please don't take this results for granted. This app is still under construction and by no means it is ready to be used in the real world. Thanks for your understanding ")
 
-status = st.radio("Do you understand the above message? If so, please answer to continue with the app:", ("Yes", "No"))
+# status = st.radio("Do you understand the above message? If so, please answer to continue with the app:", ("Yes", "No"))
 
-if status == 'Yes':
+# if status == 'Yes':
+if st.checkbox("Do you understand the above message? If so, please answer to continue with the app:"):
     # Text input 
-    time.sleep(5)
+    # time.sleep(5)
     text = st.text_area('Enter your Text', 'Type here' )
 
     if st.button('Predict'):
@@ -91,15 +92,11 @@ if status == 'Yes':
         out_thr = round(pred_thr[0], 2) * 100
         out_ide = round(pred_ide[0], 2) * 100
 
-        bar_labels=['toxic',
-                    'severe_toxic',
-                    'obscene', 
-                    'insult',
-                    'threat',
-                    'identity_hate']
+        bar_labels=['toxic','severe_toxic','obscene', 'insult','threat', 'identity_hate']
         data = [out_tox, out_sev, out_obs, out_ins, out_thr, out_ide]
         st.set_option('deprecation.showPyplotGlobalUse', False)
-        
+
+        # Graph
         height = data
         bars = bar_labels
         y_pos = np.arange(len(bars))
@@ -111,18 +108,22 @@ if status == 'Yes':
         plt.yticks(y_pos, bars)
         plt.xlim(0,100)
         plt.xlabel("% Toxicity Level Detected")
-
         st.pyplot()
+
+        # Results output
         results = [ 'Toxic Level Detected: {} %'.format(out_tox),
                     'Severe Toxic Level Detected: {} %'.format(out_sev), 
                     'Obscene Level Detected: {} %'.format(out_obs),
                     'Insult Level Detected: {} %'.format(out_ins),
                     'Threat Level Detected: {} %'.format(out_thr),
-                    'Identity Hate Level Detected: {} %'.format(out_ide)]
+                    'Identity Hate Level Detected: {} %'.format(out_ide)][::-1]
 
         for i in range(len(results)):
             st.success(results[i])
         
+        #End
         st.balloons()
-else :
-    st.error(":(")
+# else :
+#     st.error(":(")
+link = '[cristobalza.comr](http://cristobalza.com)'
+st.markdown(link, unsafe_allow_html=True)

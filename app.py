@@ -92,15 +92,7 @@ def predict():
 
     print('Done') # Helper message
 
-    def bar_chart_plot():
-        df = pd.read_csv("countries.csv")
-        trace1 = go.Bar(x=df["Country"][0:20], y=df["GDP ($ per capita)"])
-        layout = go.Layout(title="GDP of the Country", xaxis=dict(title="Country"),
-                        yaxis=dict(title="GDP Per Capita"), )
-        data = [trace1]
-        fig = go.Figure(data=data, layout=layout)
-        fig_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-        return render_template('charts.html', plot=fig_json)
+
 
     # bar_labels=['toxic', 'severe_toxic', 'obscene', 'insult', 'threat', 'identity_hate']
     # bar_values=[20,40,60,80,100]
