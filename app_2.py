@@ -65,7 +65,6 @@ if status == 'Yes':
         user_input = text
         data = [user_input]
 
-        # In hundreds
         vect = tox.transform(data)
         pred_tox = tox_model.predict_proba(vect)[:,1] 
 
@@ -84,7 +83,7 @@ if status == 'Yes':
         vect = ide.transform(data)
         pred_ide = ide_model.predict_proba(vect)[:,1] 
 
-        # Round it
+        # Round it and multiply by 100
         out_tox = round(pred_tox[0], 2) * 100
         out_sev = round(pred_sev[0], 2) * 100
         out_obs = round(pred_obs[0], 2) * 100
@@ -93,15 +92,14 @@ if status == 'Yes':
         out_ide = round(pred_ide[0], 2) * 100
 
         bar_labels=['toxic',
-        'severe_toxic',
-        'obscene', 
-        'insult',
-        'threat',
-            'identity_hate']
+                    'severe_toxic',
+                    'obscene', 
+                    'insult',
+                    'threat',
+                    'identity_hate']
         data = [out_tox, out_sev, out_obs, out_ins, out_thr, out_ide]
         st.set_option('deprecation.showPyplotGlobalUse', False)
-
-        # Make fake dataset
+        
         height = data
         bars = bar_labels
         y_pos = np.arange(len(bars))
@@ -109,7 +107,7 @@ if status == 'Yes':
         # Create horizontal bars
         plt.barh(y_pos, height)
         
-        # Create names on the y-axis
+        # Format graph
         plt.yticks(y_pos, bars)
         plt.xlim(0,100)
         plt.xlabel("% Toxicity Level Detected")
