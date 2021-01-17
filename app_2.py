@@ -49,7 +49,7 @@ with open(r"./models/identity_hate_model.pkl", "rb") as f:
     ide_model  = pickle.load(f)
 
 # Title
-st.title('Toxicity of your words')
+st.title('Toxic Word Detector App')
 
 st.warning("This app may show innacurate results, so please don't take this results for granted. This app is still under construction and by no means it is ready to be used in the real world. Thanks for your understanding ")
 
@@ -126,4 +126,4 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
 # else :
 #     st.error(":(")
 link = '[cristobalza.com](http://cristobalza.com)'
-st.markdown(link, unsafe_allow_html=True)
+st.markdown('See my website and other projects @ '+link, unsafe_allow_html=True)
