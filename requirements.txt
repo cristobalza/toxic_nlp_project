@@ -23,7 +23,7 @@ GitPython==3.1.11
 idna==2.10
 importlib-metadata==3.1.1
 ipykernel==5.3.4
-ipython==7.16.1
+ipython==7.19.0
 ipython-genutils==0.2.0
 ipywidgets==7.5.1
 itsdangerous==1.1.0
@@ -78,7 +78,7 @@ testpath==0.4.4
 threadpoolctl==2.1.0
 toml==0.10.2
 toolz==0.11.1
-tornado==4.3
+tornado==6.1
 traitlets==5.0.5
 tzlocal==2.1
 urllib3==1.26.2
