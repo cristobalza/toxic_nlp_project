@@ -4,6 +4,9 @@ import pickle
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
+import matplotlib.style as style
+style.use('fivethirtyeight')
+import seaborn as sns
 import time
 
 # Load the vecotrize vocabulary specific to the category
@@ -52,10 +55,11 @@ kaggle_link = '[Kaggle Competition](https://www.kaggle.com/c/jigsaw-toxic-commen
 # Title
 st.title('Toxic Word Detector App')
 
-st.markdown('### Introduction')
-
+st.markdown('### Introduction ')
+st.markdown('\n\n')
 st.markdown("When we are engaging  in text conversations in online platforms, in most cases, we know the intention of our words. However, sometimes we don't know how *bad* our words can be interpreted.")
-st.markdown("This app uses Machine Learning to predict your text against different categories of language toxicity such as `toxic, severe toxic, obscene, insulting, threating, identity hateful` categories. To see more about the model used here you can visit my "+code_repo+".", unsafe_allow_html=True)
+st.markdown("The purpose of this app is not silence people that have discriminatory tendencies. Instead, I think it is better to let know people why the things they say can hurt other people's feelings.")
+st.markdown("This app uses Machine Learning to predict your text against different categories of language toxicity such as `toxic, severe toxic, obscene, insulting, threating, identity hateful` categories. To see more about the model and work pipeline used in this project, you can visit my "+code_repo+".", unsafe_allow_html=True)
 st.markdown("It is important for the user/reader to know that the data used to train the models for this project was from a "+kaggle_link+" and the documentation of the toxic categories can be found here "+ibm_docu+".",  unsafe_allow_html=True)
 
 
@@ -111,37 +115,26 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
         data = [out_tox, out_sev, out_obs, out_ins, out_thr, out_ide]
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
-        # Graph
-        height = data
-        bars = bar_labels
-        y_pos = np.arange(len(bars))
+        # # Graph
+        toxic_cols_perc=['toxic %','severe_toxic %','obscene %', 'insult %','threat %', 'identity_hate %'][::-1]
+        df = pd.DataFrame(data = [data[::-1]], columns = bar_labels)
+        # height = data
+        # bars = bar_labels
+        # y_pos = np.arange(len(bars))
         
-        # Create horizontal bars
-        plt.barh(y_pos, height)
+        # # Create horizontal bars
+        # plt.barh(y_pos, height)
         
-        # Format graph
-        plt.yticks(y_pos, bars)
+        # # Format graph
+        # plt.yticks(y_pos, bars)
+        sns.barplot(data=df, orient = 'h', palette='inferno')
         plt.xlim(0,100)
         plt.xlabel("% Toxicity Level Detected")
         st.pyplot()
 
-        # Results output
-        # results = [ 'Toxic Level Detected: {} %'.format(out_tox),
-        #             'Severe Toxic Level Detected: {} %'.format(out_sev), 
-        #             'Obscene Level Detected: {} %'.format(out_obs),
-        #             'Insult Level Detected: {} %'.format(out_ins),
-        #             'Threat Level Detected: {} %'.format(out_thr),
-        #             'Identity Hate Level Detected: {} %'.format(out_ide)][::-1]
 
-        # for i in range(len(results)):
-        #     st.success(results[i])
-
-        toxic_cols_perc=['toxic %','severe_toxic %','obscene %', 'insult %','threat %', 'identity_hate %'][::-1]
-        df = pd.DataFrame(data = [data[::-1]], columns = toxic_cols_perc)
         st.table(df)
 
-
-        
         #End
         st.balloons()
 # else :
