@@ -55,14 +55,12 @@ kaggle_link = '[Kaggle Competition](https://www.kaggle.com/c/jigsaw-toxic-commen
 # Title
 st.title('Toxic Word Detector App')
 
-st.markdown('### Introduction ')
+st.markdown('## Introduction ')
 st.markdown('\n\n')
 st.markdown("When we are engaging  in text conversations in online platforms, in most cases, we know the intention of our words. However, sometimes we don't know how *bad* our words can be interpreted.")
 st.markdown("The purpose of this app is not silence people that have discriminatory tendencies. Instead, I think it is better to let know people why the things they say can hurt other people's feelings.")
 st.markdown("This app uses Machine Learning to predict your text against different categories of language toxicity such as `toxic, severe toxic, obscene, insulting, threating, identity hateful` categories. To see more about the model and work pipeline used in this project, you can visit my "+code_repo+".", unsafe_allow_html=True)
 st.markdown("It is important for the user/reader to know that the data used to train the models for this project was from a "+kaggle_link+" and the documentation of the toxic categories can be found here "+ibm_docu+".",  unsafe_allow_html=True)
-
-
 
 st.info("This app may show innacurate results, so please don't take this results for granted. This app is still under construction and by no means it is ready to be used in the real world situations such as social media purposes and others. \n \n Thanks for your understanding ")
 
@@ -71,12 +69,13 @@ st.info("This app may show innacurate results, so please don't take this results
 # if status == 'Yes':
 if st.checkbox("Do you understand the above message? If so, please answer to continue with the app:"):
     # Text input 
-    # time.sleep(5)
 
-    st.markdown('### Instructions')
+    st.markdown('#### Instructions')
 
     st.markdown('- Step 1: Input desired text data')
     st.markdown('- Step 2: Press `Predict` button and see how toxic was your text.')
+
+    time.sleep(5)
 
     text = st.text_area('Enter your Text', 'Type here' )
 
