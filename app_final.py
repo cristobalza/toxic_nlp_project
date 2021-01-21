@@ -5,8 +5,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 import time
-import altair as alt
-from altair import Chart, X, Y, Axis, SortField, OpacityValue
 
 # Load the vecotrize vocabulary specific to the category
 # rb: read bytes
@@ -48,10 +46,21 @@ with open(r"./models/threat_model.pkl", "rb") as f:
 with open(r"./models/identity_hate_model.pkl", "rb") as f:
     ide_model  = pickle.load(f)
 
+code_repo = '[Github repo](https://github.com/cristobalza/toxic_nlp_project)'
+ibm_docu = '[Documentation](https://developer.ibm.com/technologies/artificial-intelligence/models/max-toxic-comment-classifier/)'
+kaggle_link = '[Kaggle Competition](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge)'
 # Title
 st.title('Toxic Word Detector App')
 
-st.warning("This app may show innacurate results, so please don't take this results for granted. This app is still under construction and by no means it is ready to be used in the real world. Thanks for your understanding ")
+st.markdown('### Introduction')
+
+st.markdown("When we are engaging  in text conversations in online platforms, in most cases, we know the intention of our words. However, sometimes we don't know how *bad* our words can be interpreted.")
+st.markdown("This app uses Machine Learning to predict your text against different categories of language toxicity such as `toxic, severe toxic, obscene, insulting, threating, identity hateful` categories. To see more about the model used here you can visit my "+code_repo+".", unsafe_allow_html=True)
+st.markdown("It is important for the user/reader to know that the data used to train the models for this project was from a "+kaggle_link+" and the documentation of the toxic categories can be found here "+ibm_docu+".",  unsafe_allow_html=True)
+
+
+
+st.info("This app may show innacurate results, so please don't take this results for granted. This app is still under construction and by no means it is ready to be used in the real world situations such as social media purposes and others. \n \n Thanks for your understanding ")
 
 # status = st.radio("Do you understand the above message? If so, please answer to continue with the app:", ("Yes", "No"))
 
@@ -59,6 +68,12 @@ st.warning("This app may show innacurate results, so please don't take this resu
 if st.checkbox("Do you understand the above message? If so, please answer to continue with the app:"):
     # Text input 
     # time.sleep(5)
+
+    st.markdown('### Instructions')
+
+    st.markdown('- Step 1: Input desired text data')
+    st.markdown('- Step 2: Press `Predict` button and see how toxic was your text.')
+
     text = st.text_area('Enter your Text', 'Type here' )
 
     if st.button('Predict'):
@@ -111,15 +126,21 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
         st.pyplot()
 
         # Results output
-        results = [ 'Toxic Level Detected: {} %'.format(out_tox),
-                    'Severe Toxic Level Detected: {} %'.format(out_sev), 
-                    'Obscene Level Detected: {} %'.format(out_obs),
-                    'Insult Level Detected: {} %'.format(out_ins),
-                    'Threat Level Detected: {} %'.format(out_thr),
-                    'Identity Hate Level Detected: {} %'.format(out_ide)][::-1]
+        # results = [ 'Toxic Level Detected: {} %'.format(out_tox),
+        #             'Severe Toxic Level Detected: {} %'.format(out_sev), 
+        #             'Obscene Level Detected: {} %'.format(out_obs),
+        #             'Insult Level Detected: {} %'.format(out_ins),
+        #             'Threat Level Detected: {} %'.format(out_thr),
+        #             'Identity Hate Level Detected: {} %'.format(out_ide)][::-1]
 
-        for i in range(len(results)):
-            st.success(results[i])
+        # for i in range(len(results)):
+        #     st.success(results[i])
+
+        toxic_cols_perc=['toxic %','severe_toxic %','obscene %', 'insult %','threat %', 'identity_hate %'][::-1]
+        df = pd.DataFrame(data = [data[::-1]], columns = toxic_cols_perc)
+        st.table(df)
+
+
         
         #End
         st.balloons()
