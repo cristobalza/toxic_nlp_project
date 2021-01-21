@@ -115,7 +115,6 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
         # # Graph
-        toxic_cols_perc=['toxic %','severe_toxic %','obscene %', 'insult %','threat %', 'identity_hate %'][::-1]
         df = pd.DataFrame(data = [data[::-1]], columns = bar_labels)
         # height = data
         # bars = bar_labels
@@ -131,7 +130,8 @@ if st.checkbox("Do you understand the above message? If so, please answer to con
         plt.xlabel("% Toxicity Level Detected")
         st.pyplot()
 
-
+        cols = df.columns
+        df.rename(columns = {i:i+' %' for i in cols}, inplace=True)
         st.table(df)
 
         #End
