@@ -30,7 +30,7 @@ with open(r"./models/threat_vect.pkl", "rb") as f:
 with open(r"./models/identity_hate_vect.pkl", "rb") as f:
     ide = pickle.load(f)
 
-# Load the pickled models
+# Load the ML models
 with open(r"./models/toxic_model.pkl", "rb") as f:
     tox_model = pickle.load(f)
 
@@ -52,9 +52,9 @@ with open(r"./models/identity_hate_model.pkl", "rb") as f:
 code_repo = '[Github repo](https://github.com/cristobalza/toxic_nlp_project)'
 ibm_docu = '[here](https://developer.ibm.com/technologies/artificial-intelligence/models/max-toxic-comment-classifier/)'
 kaggle_link = '[Kaggle Competition](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge)'
+
 # Title
 st.title('Toxic Word Detector App')
-
 st.markdown('## Introduction ')
 st.markdown('\n\n')
 st.markdown("When we are engaging in conversations on online platforms, in most cases, we know the intention of our words and what we are trying to convey with them. Sometimes, however, we might not considerate the possible consequences of our words and we end up hurting other people. There is also the case of people that cyberbully other people just for fun, for the sake of being mean, or some other reason. Regardless of the case, the Internet can be a place where words can easily inflict great damage to entire populations with or without the knowledge of the emissor. Thus this app tries to detect the toxicity of words.") 
