@@ -9,6 +9,9 @@ style.use('fivethirtyeight')
 import seaborn as sns
 import time
 
+import warnings
+warnings.filterwarnings('ignore')
+
 # Load the vecotrize vocabulary specific to the category
 # rb: read bytes
 # wb: write bytes
